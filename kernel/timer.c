@@ -1,5 +1,6 @@
 #include "timer.h"
 #include "types.h"
+#include "printf.h"
 
 #define TICK_RATE_HZ 2
 
@@ -44,12 +45,16 @@ static void plat_handle_timer_irq()
 // 	asm volatile("msr cntv_ctl_el0, %0" ::"r"(timer_ctl));
 // }
 
+static int tick;
+
 void timer_init()
 {
+	tick = 0;
 	plat_timer_init();
 }
 
 void handle_timer_irq()
 {
+	printf("tick %d\n", ++tick);
 	plat_handle_timer_irq();
 }

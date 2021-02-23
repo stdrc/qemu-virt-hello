@@ -4,33 +4,36 @@ SECTIONS
 {
     /* Starts at LOADER_ADDR. */
     . = 0x40000000;
-    __start = .;
+    __kernel_start = .;
     __text_start = .;
-    .text :
-    {
+    .text : {
         KEEP(*(.text.boot))
         KEEP(*(.vectors))
-        *(.text)
+        *(.text .text.*)
     }
-    . = ALIGN(4096); /* align to page size */
+    . = ALIGN(4K);
     __text_end = .;
 
     __data_start = .;
-    .data :
-    {
-        *(.data)
+    .data : {
+        *(.data .data.*)
     }
-    . = ALIGN(4096); /* align to page size */
+    . = ALIGN(4K);
     __data_end = .;
 
-    __bss_start = .;
-    .bss :
-    {
-        bss = .;
-        *(.bss)
+    __rodata_start = .;
+    .rodata : {
+        *(.rodata .rodata.*)
     }
-    . = ALIGN(4096); /* align to page size */
+    . = ALIGN(4K);
+    __rodata_end = .;
+
+    __bss_start = .;
+    .bss : {
+        *(.bss .bss.*)
+    }
+    . = ALIGN(4K);
     __bss_end = .;
-    __end = .;
+    __kernel_end = .;
 }
 __bss_size = (__bss_end - __bss_start) >> 3;
