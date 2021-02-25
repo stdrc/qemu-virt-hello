@@ -11,4 +11,4 @@ make run
 
 ## Credit
 
-Some code is from ChCore, which is the lab of [MOSPI].
+Some code is from ChCore, which is the lab of [MOSPI](https://ipads.se.sjtu.edu.cn/mospi/).
