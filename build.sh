@@ -9,8 +9,8 @@ main() {
 	echo "compiling kernel image..."
 	cd build
 
-	cmake -G Ninja ..
-	ninja
+	cmake -G "Unix Makefiles" ..
+	make
 
 	exit 0
 }
